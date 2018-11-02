@@ -6,7 +6,7 @@
 // A ContactForm component that, when filled out and a submit button is pressed, adds a new contact to storage.
 // It should import the ContactCollection component.
 
-import contactsAPI from "./contactCollection"
+
 import contactForm from "./contactForm"
 
 let fakeContact = {
@@ -14,9 +14,6 @@ let fakeContact = {
   Phone: "888-go-away"
 }
 // contactsAPI.postContact(fakeContact)
-contactsAPI.fetchContact()
+// contactsAPI.fetchContact()
 contactForm.createForm()
 contactForm.form = $("#contactForm")
-
-console.log("form to grab: ", contactForm.form)
-console.log("onsubmit function: ", contactForm.form.onsubmit)

@@ -1,6 +1,7 @@
 // A ContactForm component that, when filled out and a submit button is pressed, adds a new contact to storage.
 // It should import the ContactCollection component.
 
+import contactsAPI from "./contactCollection"
 class contactForm {
 
   createForm() {
@@ -10,8 +11,10 @@ class contactForm {
       .attr("onsubmit", "return false").attr("action", " ")
     let addressContainer = $("<div></div>").addClass("address--container container")
       .attr("id", "addressContainer").text("Address:")
+
     let submitBtn = $("<button></button>").addClass("button form--button").attr("type", "submit").text("Add Contact")
-    $(submitBtn).on("click", () => this.postContact())
+    $(submitBtn).on("click", () => this.getValues())
+
     let firstName = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "firstName")
     let firstNameLabel = $("<label></label>").addClass("label").attr("for", "firstName").text("First Name:")
 
@@ -49,8 +52,14 @@ class contactForm {
     e.preventDefault()
   }
 
-  postContact() {
-    console.log()
+  createObjtoPost() {
+    console.log("it works?")
+    console.log("this is: ", this)
+    console.log("form values: ", this.form)
+
+    //  return an object to post using contactCollection function
+    // contactsAPI.postContact()
+
   }
 
   set form(contactForm) {
@@ -61,29 +70,12 @@ class contactForm {
     return this._form
   }
 
-  get firstNameVal() {
-    return firstName.value
-  }
-  get lastNameVal() {
-    return lastName.value
-  }
-  get telephoneVal() {
-    return telephone.value
-  }
-  get emailVal() {
-    return email.value
-  }
-  get streetVal() {
-    return street.value
-  }
-  get citryVal() {
-    return citry.value
-  }
-  get zipVal() {
-    return zip.value
-  }
-  get stateVal() {
-    return state.value
+  getValues() {
+    let contactDetails = {}
+    $.makeArray($(".form--input")).forEach((input) => {
+      contactDetails[input.name] = input.value
+    })
+    console.table(contactDetails)
   }
 
 }
