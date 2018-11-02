@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  padding:5px;
+}
+
+.form--container{
+  display: flex;
+  flex-direction: row;
+  padding:5px;
+}
+.basic__info--container{
+  display:flex;
+  flex-direction: column;
+}
+.address--container {
+  display: flex;
+  flex-direction: column;
+  padding:5px;
+}
+.form--button {
+  height: 46px;
+  width: 74px;
+  border-radius: 5px;
+  border: solid 1px grey;
+  padding:2px;
+  background-color: rgba(214, 214, 214, 0.651);
+  align-self: center
+}
