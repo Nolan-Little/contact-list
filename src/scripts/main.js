@@ -17,4 +17,13 @@ import listContacts from "./contactListDisplay"
 contactForm.createForm()
 contactForm.form = $("#contactForm")
 
-$(".display--all--button").on("click", () => listContacts.listAllContacts())
+$(".display--all--button").on("click", () => {
+  $(".card--display").empty()
+  listContacts.listAllContacts()
+})
+
+$(".display--search--button").on("click", () => {
+  $(".card--display").empty()
+  let search = $("#search--input")
+  listContacts.listSpecificContacts(search[0].value)
+})
