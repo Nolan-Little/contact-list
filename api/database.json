@@ -1,5 +1,59 @@
 {
   "contacts": [
-    
+    {
+      "firstName": "Nolan",
+      "lastName": "Little",
+      "email": "whatever@hotmail.com",
+      "telephone": "123-456-7890",
+      "street": "9999 Gonzo Blvd.",
+      "city": "Nashville",
+      "zip": "42859",
+      "state": "TN",
+      "id": 1
+    },
+    {
+      "firstName": "Nolan",
+      "lastName": "Little",
+      "email": "whatever@hotmail.com",
+      "telephone": "123-456-7890",
+      "street": "9999 Gonzo Blvd.",
+      "city": "Nashville",
+      "zip": "42859",
+      "state": "TN",
+      "id": 2
+    },
+    {
+      "firstName": "Nolan",
+      "lastName": "Little",
+      "email": "whatever@hotmail.com",
+      "telephone": "123-456-7890",
+      "street": "9999 Gonzo Blvd.",
+      "city": "Nashville",
+      "zip": "42859",
+      "state": "TN",
+      "id": 3
+    },
+    {
+      "firstName": "Nolan",
+      "lastName": "Little",
+      "email": "whatever@hotmail.com",
+      "telephone": "123-456-7890",
+      "street": "9999 Gonzo Blvd.",
+      "city": "Nashville",
+      "zip": "42859",
+      "state": "TN",
+      "id": 4
+    },
+    {
+      "firstName": "Nolan",
+      "lastName": "Little",
+      "email": "whatever@hotmail.com",
+      "telephone": "123-456-7890",
+      "street": "9999 Gonzo Blvd.",
+      "city": "Nashville",
+      "zip": "42859",
+      "state": "TN",
+      "id": 5
+    }
   ]
 }

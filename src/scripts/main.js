@@ -8,12 +8,13 @@
 
 
 import contactForm from "./contactForm"
+import listContacts from "./contactListDisplay"
 
-let fakeContact = {
-  name: "Who Cares",
-  Phone: "888-go-away"
-}
+
+
 // contactsAPI.postContact(fakeContact)
 // contactsAPI.fetchContact()
 contactForm.createForm()
 contactForm.form = $("#contactForm")
+
+$(".display--all--button").on("click", () => listContacts.listAllContacts())

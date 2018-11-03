@@ -27,3 +27,20 @@
   background-color: rgba(214, 214, 214, 0.651);
   align-self: center
 }
+
+.card--display {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.card--container{
+  display: flex;
+  flex-flow: column wrap;
+  border: solid 2px grey;
+  border-radius: 5px;
+  margin:5px;
+}
+.details--container {
+  display: flex;
+  flex-flow: column;
+}
