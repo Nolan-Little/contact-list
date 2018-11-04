@@ -2,6 +2,7 @@
 // It should import the ContactCollection component.
 
 import contactsAPI from "./contactCollection"
+
 class contactForm {
 
   createForm() {
@@ -13,41 +14,46 @@ class contactForm {
     let addressContainer = $("<div></div>").addClass("address--container container")
       .attr("id", "addressContainer")
     let submitBtn = $("<button></button>").addClass("button form--button").attr("type", "submit").text("Add Contact")
+    let successMessage = $("<h3></h3>").addClass("success-message hidden").text("Contact Information Saved!")
+
     $(submitBtn).on("click", () => {
       let objToPost = this.getValues()
-      contactsAPI.postContact(objToPost)
-      console.log("posted!")
+      if (this.validateValues(objToPost) === 1) {
+        contactsAPI.postContact(objToPost)
+        this.displaySuccess()
+        formEl[0].reset()
+      }
     })
 
-    let firstName = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "firstName").attr("required", "")
+    let firstName = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "firstName")
     let firstNameLabel = $("<label></label>").addClass("label").attr("for", "firstName").text("First Name:")
 
-    let lastName = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "lastName").attr("required", "")
+    let lastName = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "lastName")
     let lastNameLabel = $("<label></label>").addClass("label").attr("for", "firstName").text("Last Name:")
 
     let telephone = $("<input></input>").addClass("form--input").attr("type", "tel")
-      .attr("name", "telephone").attr("pattern", "[0-9]{3}-[0-9]{3}-[0-9]{4}").attr("placeholder", "123-546-7890").attr("required", "")
+      .attr("name", "telephone").attr("placeholder", "123-546-7890")
     let telephoneLabel = $("<label></label>").addClass("label").attr("for", "firstName").text("Primary Phone:")
 
-    let email = $("<input></input>").addClass("form--input").attr("type", "email").attr("name", "email").attr("required", "")
+    let email = $("<input></input>").addClass("form--input").attr("type", "email").attr("name", "email")
     let emailLabel = $("<label></label>").addClass("label").attr("for", "email").text("Email:")
 
-    let street = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "street").attr("required", "")
+    let street = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "street")
     let streetLabel = $("<label></label>").addClass("label").attr("for", "street").text("Street:")
 
-    let city = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "city").attr("required", "")
+    let city = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "city")
     let cityLabel = $("<label></label>").addClass("label").attr("for", "city").text("City:")
 
-    let zip = $("<input></input>").addClass("form--input").attr("type", "number").attr("name", "zip").attr("required", "")
+    let zip = $("<input></input>").addClass("form--input").attr("type", "number").attr("name", "zip")
     let zipLabel = $("<label></label>").addClass("label").attr("for", "zip").text("ZIP code:")
 
-    let state = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "state").attr("required", "")
+    let state = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "state")
     let stateLabel = $("<label></label>").addClass("label").attr("for", "state").text("State:")
 
-    $(addressContainer).append(streetLabel, street, cityLabel, city, zipLabel, zip, stateLabel, state)
+    $(addressContainer).append(streetLabel, street, cityLabel, city, stateLabel, state, zipLabel, zip)
     $(basicInfoContainer).append(firstNameLabel, firstName, lastNameLabel, lastName, emailLabel, email,
       telephoneLabel, telephone)
-    $(formEl).append(basicInfoContainer, addressContainer, submitBtn)
+    $(formEl).append(basicInfoContainer, addressContainer, submitBtn, successMessage)
     $(formContainer).append(formEl)
     $(output).append(formContainer)
   }
@@ -71,10 +77,65 @@ class contactForm {
     $.makeArray($(".form--input")).forEach((input) => {
       contactDetails[input.name] = input.value
     })
-    console.table(contactDetails)
     return contactDetails
   }
 
+  validateValues(obj) {
+    let firstRGEX = /^[A-Z]{1,25}$/i
+    let firstResult = firstRGEX.test(obj.firstName)
+    if (firstResult === false) {
+      alert("Please enter a valid first name")
+      return null
+    }
+    let lastRGEX = /^[A-Z]{1,25}$/i
+    let lastResult = lastRGEX.test(obj.lastName)
+    if (lastResult === false) {
+      alert("Please enter a valid last name")
+      return null
+    }
+
+    let emailRGEX = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
+    let emailResult = emailRGEX.test(obj.email)
+    if (emailResult === false) {
+      alert("Please enter a valid email address")
+      return null
+    }
+
+    let phoneRGEX = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/
+    let phoneResult = phoneRGEX.test(obj.telephone)
+    if (phoneResult === false) {
+      alert("Please enter a valid phone number in the correct format")
+      return null
+    }
+
+    let cityRGEX = /^[A-Z]{1,25}$/i
+    let cityResult = cityRGEX.test(obj.city)
+    if (cityResult === false) {
+      alert("Please enter a valid city")
+      return null
+    }
+
+    let zipRGEX = /^[0-9]{5}$/
+    let zipResult = zipRGEX.test(obj.zip)
+    if (zipResult === false) {
+      alert("Please enter a valid 5-digit ZIP code")
+      return null
+    }
+
+    let stateRGEX = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/i
+    let stateResult = stateRGEX.test(obj.state)
+    if (stateResult === false) {
+      alert("Please enter a valid state")
+      return null
+    }
+    return 1
+  }
+
+  displaySuccess() {
+    let successMessage = $(".success-message")
+    $(successMessage).toggleClass("hidden")
+    setTimeout(() => $(successMessage).toggleClass("hidden"), 3000)
+  }
 }
 
 
