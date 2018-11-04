@@ -2,6 +2,7 @@ import contactCard from "./contactDisplay"
 import contactsAPI from "./contactCollection"
 
 let listContacts = {
+  // function to fetch all contacts from DB and display all
   listAllContacts() {
     contactsAPI.fetchContact().then((contacts) => {
       contacts.forEach((contact) => {
@@ -9,23 +10,18 @@ let listContacts = {
       })
     })
   },
-
-  listSpecificContacts(query) {
-    contactsAPI.fetchContact().then((contacts) => {
-      $(".card--display").empty()
-      $(".card--display").text("")
-      contacts.forEach((contact) => {
-        if (query != "") {
-          if (contact.firstName.includes(query) || contact.lastName.includes(query)) {
-            console.log(query)
-            contactCard.createCard(contact)
-          }
-        }
-      })
-      if ($(".card--display")[0].childElementCount === 0) {
-        $(".card--display").text("")
-        $(".card--display").empty()
-        $(".card--display").text("No contacts matched those search terms")
+  // function to use search input to filter all cards by search value
+  filterContacts() {
+    let input = $("#search--input")[0].value
+    input = input.toString().toUpperCase()
+    let cardsToFilter = $(".card--container").toArray()
+    cardsToFilter.forEach((card) => {
+      let title = $(card).children()[0]
+      title = title.textContent.toUpperCase()
+      if (title.indexOf(input) > -1) {
+        $(card).removeClass("hidden")
+      } else {
+        $(card).addClass("hidden")
       }
     })
   }

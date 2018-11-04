@@ -19,11 +19,10 @@ contactForm.form = $("#contactForm")
 
 $(".display--all--button").on("click", () => {
   $(".card--display").empty()
+  $(".filter--container").removeClass("hidden")
   listContacts.listAllContacts()
 })
 
-$(".display--search--button").on("click", () => {
-  $(".card--display").empty()
-  let search = $("#search--input")
-  listContacts.listSpecificContacts(search[0].value)
+$("#search--input").on("keyup", () => {
+  listContacts.filterContacts()
 })
