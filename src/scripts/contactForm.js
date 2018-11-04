@@ -26,28 +26,32 @@ class contactForm {
     })
 
     let firstName = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "firstName")
+      .attr("id", "firstName")
     let firstNameLabel = $("<label></label>").addClass("label").attr("for", "firstName").text("First Name:")
 
     let lastName = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "lastName")
+      .attr("id", "lastName")
     let lastNameLabel = $("<label></label>").addClass("label").attr("for", "firstName").text("Last Name:")
 
     let telephone = $("<input></input>").addClass("form--input").attr("type", "tel")
-      .attr("name", "telephone").attr("placeholder", "123-546-7890")
+      .attr("name", "telephone").attr("placeholder", "123-546-7890").attr("id", "telephone")
     let telephoneLabel = $("<label></label>").addClass("label").attr("for", "firstName").text("Primary Phone:")
 
     let email = $("<input></input>").addClass("form--input").attr("type", "email").attr("name", "email")
+      .attr("id", "email")
     let emailLabel = $("<label></label>").addClass("label").attr("for", "email").text("Email:")
 
     let street = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "street")
+      .attr("id", "street")
     let streetLabel = $("<label></label>").addClass("label").attr("for", "street").text("Street:")
 
-    let city = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "city")
+    let city = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "city").attr("id", "city")
     let cityLabel = $("<label></label>").addClass("label").attr("for", "city").text("City:")
 
-    let zip = $("<input></input>").addClass("form--input").attr("type", "number").attr("name", "zip")
+    let zip = $("<input></input>").addClass("form--input").attr("type", "number").attr("name", "zip").attr("id", "zip")
     let zipLabel = $("<label></label>").addClass("label").attr("for", "zip").text("ZIP code:")
 
-    let state = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "state")
+    let state = $("<input></input>").addClass("form--input").attr("type", "text").attr("name", "state").attr("id", "state")
     let stateLabel = $("<label></label>").addClass("label").attr("for", "state").text("State:")
 
     $(addressContainer).append(streetLabel, street, cityLabel, city, stateLabel, state, zipLabel, zip)
@@ -85,12 +89,14 @@ class contactForm {
     let firstResult = firstRGEX.test(obj.firstName)
     if (firstResult === false) {
       alert("Please enter a valid first name")
+      this.addInvalid("firstName")
       return null
     }
     let lastRGEX = /^[A-Z]{1,25}$/i
     let lastResult = lastRGEX.test(obj.lastName)
     if (lastResult === false) {
       alert("Please enter a valid last name")
+      this.addInvalid("lastName")
       return null
     }
 
@@ -98,6 +104,7 @@ class contactForm {
     let emailResult = emailRGEX.test(obj.email)
     if (emailResult === false) {
       alert("Please enter a valid email address")
+      this.addInvalid("email")
       return null
     }
 
@@ -105,6 +112,7 @@ class contactForm {
     let phoneResult = phoneRGEX.test(obj.telephone)
     if (phoneResult === false) {
       alert("Please enter a valid phone number in the correct format")
+      this.addInvalid("telephone")
       return null
     }
 
@@ -112,6 +120,7 @@ class contactForm {
     let cityResult = cityRGEX.test(obj.city)
     if (cityResult === false) {
       alert("Please enter a valid city")
+      this.addInvalid("city")
       return null
     }
 
@@ -119,6 +128,7 @@ class contactForm {
     let zipResult = zipRGEX.test(obj.zip)
     if (zipResult === false) {
       alert("Please enter a valid 5-digit ZIP code")
+      this.addInvalid("zip")
       return null
     }
 
@@ -126,6 +136,7 @@ class contactForm {
     let stateResult = stateRGEX.test(obj.state)
     if (stateResult === false) {
       alert("Please enter a valid state")
+      this.addInvalid("state")
       return null
     }
     return 1
@@ -135,6 +146,16 @@ class contactForm {
     let successMessage = $(".success-message")
     $(successMessage).toggleClass("hidden")
     setTimeout(() => $(successMessage).toggleClass("hidden"), 3000)
+  }
+
+  addInvalid(field) {
+    console.log(field)
+    $(`#${field}`).addClass("invalid")
+    setTimeout(() => $(`#${field}`).removeClass("invalid"), 100)
+    setTimeout(() => $(`#${field}`).addClass("invalid"), 200)
+    setTimeout(() => $(`#${field}`).removeClass("invalid"), 300)
+    setTimeout(() => $(`#${field}`).addClass("invalid"), 400)
+    setTimeout(() => $(`#${field}`).removeClass("invalid"), 4000)
   }
 }
 
