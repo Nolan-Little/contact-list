@@ -15,7 +15,7 @@ let contactCard = {
 
     $(cardDetails).append(cardPhone, cardEmail, cardAddress)
     $(cardContainer).append(cardName, cardDetails)
-    $(".card--display").append(cardContainer)
+    return cardContainer
   }
 }
 

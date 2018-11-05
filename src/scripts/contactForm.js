@@ -18,6 +18,7 @@ class contactForm {
 
     $(submitBtn).on("click", () => {
       let objToPost = this.getValues()
+      // if statement checks to see that regex validation function returns "1", which is the success value
       if (this.validateValues(objToPost) === 1) {
         contactsAPI.postContact(objToPost)
         this.displaySuccess()
@@ -75,7 +76,7 @@ class contactForm {
   get form() {
     return this._form
   }
-
+  // creates an object from the values of the form fields
   getValues() {
     let contactDetails = {}
     $.makeArray($(".form--input")).forEach((input) => {
@@ -83,7 +84,7 @@ class contactForm {
     })
     return contactDetails
   }
-
+  // validates form fields with RegExps
   validateValues(obj) {
     let firstRGEX = /^[A-Z]{1,25}$/i
     let firstResult = firstRGEX.test(obj.firstName)
@@ -141,15 +142,14 @@ class contactForm {
     }
     return 1
   }
-
+  // display success message when contact is posted to DB
   displaySuccess() {
     let successMessage = $(".success-message")
     $(successMessage).toggleClass("hidden")
     setTimeout(() => $(successMessage).toggleClass("hidden"), 3000)
   }
-
+  // creates flashing field effect on the field that is impromperly completed
   addInvalid(field) {
-    console.log(field)
     $(`#${field}`).addClass("invalid")
     setTimeout(() => $(`#${field}`).removeClass("invalid"), 100)
     setTimeout(() => $(`#${field}`).addClass("invalid"), 200)

@@ -6,7 +6,8 @@ let listContacts = {
   listAllContacts() {
     contactsAPI.fetchContact().then((contacts) => {
       contacts.forEach((contact) => {
-        contactCard.createCard(contact)
+        let createdCard = contactCard.createCard(contact)
+        $(".card--display").append(createdCard)
       })
     })
   },
